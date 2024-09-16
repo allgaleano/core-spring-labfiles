@@ -23,40 +23,7 @@ import javax.sql.DataSource;
 @Configuration
 public class RewardsConfig {
 
-	DataSource dataSource;
-
-	@Autowired
-	public RewardsConfig(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
-		
-	@Bean
-	public RewardNetwork rewardNetwork(){
-		return new RewardNetworkImpl(
-			accountRepository(), 
-			restaurantRepository(), 
-			rewardRepository());
-	}
 	
-	@Bean
-	public AccountRepository accountRepository(){
-		JdbcAccountRepository repository = new JdbcAccountRepository();
-		repository.setDataSource(dataSource);
-		return repository;
-	}
-	
-	@Bean
-	public RestaurantRepository restaurantRepository(){
-		JdbcRestaurantRepository repository = new JdbcRestaurantRepository(dataSource);
-		return repository;
-	}
-	
-	@Bean
-	public RewardRepository rewardRepository(){
-		JdbcRewardRepository repository = new JdbcRewardRepository();
-		repository.setDataSource(dataSource);
-		return repository;
-	}
 	
 	// TODO-02: Remove all of the @Bean methods above.
 	// - Remove the code that autowires DataSource as well.
